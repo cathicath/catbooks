@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Your Cart | CatBooks{% endblock %}
+
+{% block content %}
+<h1>Your Shopping Cart</h1>
+
+{% if items %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Book Title</th>
+            <th>Price (USD)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item[1] }}</td>
+            <td>${{ item[2] }}</td>
+            <td>
+                <form method="post" action="{{ url_for('remove_from_cart', book_id=item[0]) }}">
+                    <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p><strong>Total:</strong> ${{ total }}</p>
+<button class="btn btn-primary">Checkout</button>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

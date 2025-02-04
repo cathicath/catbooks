@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Returns | CatBooks{% endblock %}
+
+{% block content %}
+<h1>Return an Item</h1>
+{% if submitted %}
+    <div class="alert alert-success">Your return has been submitted.</div>
+{% else %}
+    <form method="post">
+        <div class="mb-3">
+            <label for="order_id" class="form-label">Order ID</label>
+            <input type="text" class="form-control" id="order_id" name="order_id" required>
+        </div>
+        <div class="mb-3">
+            <label for="reason" class="form-label">Reason for Return</label>
+            <textarea class="form-control" id="reason" name="reason" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Return</button>
+    </form>
+{% endif %}
+{% endblock %}

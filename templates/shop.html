@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Shop | CatBooks{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Available Fantasy Books</h1>
+<div class="row">
+    {% for book in books %}
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <a href="{{ url_for('book_details', book_id=book[0]) }}">
+                {% if book[4] %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ book[4]) }}" class="card-img-top" alt="{{ book[1] }}" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ book[1] }}</h5>
+                    <p class="card-text">Author: {{ book[2] }}</p>
+                    <p class="card-text"><strong>${{ book[3] }}</strong></p>
+                </div>
+            </a>
+            <a href="{{ url_for('add_to_cart', book_id=book[0]) }}" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

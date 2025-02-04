@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | CatBooks{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h1 class="card-title">Do you wish to contact us?</h1>
+        {% if submitted %}
+            <div class="alert alert-success" role="alert">
+                Thank you, {{ name }}! Your message has been sent.
+            </div>
+            <p><strong>Message:</strong> {{ message }}</p>
+        {% else %}
+            <form method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

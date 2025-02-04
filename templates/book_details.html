@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book[1] }} | CatBooks{% endblock %}
+
+{% block content %}
+<div class="card mb-4">
+    {% if book[4] %}
+        <img src="{{ url_for('static', filename='uploads/' ~ book[4]) }}" class="card-img-top" alt="{{ book[1] }}" style="max-height: 400px; object-fit: cover;">
+    {% endif %}
+    <div class="card-body">
+        <h2 class="card-title">{{ book[1] }}</h2>
+        <p class="card-text">Author: {{ book[2] }}</p>
+        <p class="card-text"><strong>Price:</strong> ${{ book[3] }}</p>
+        <a href="{{ url_for('add_to_cart', book_id=book[0]) }}" class="btn btn-primary">Add to Cart</a>
+    </div>
+</div>
+<a href="{{ url_for('shop') }}" class="btn btn-secondary">Back to Shop</a>
+{% endblock %}

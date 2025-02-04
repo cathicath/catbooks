@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Reviews | CatBooks{% endblock %}
+
+{% block content %}
+<h1>Submit Your Review</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="review" class="form-label">Your Review</label>
+        <textarea class="form-control" id="review" name="review" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="file" class="form-label">Upload an Image (optional)</label>
+        <input type="file" class="form-control" id="file" name="file">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+</form>
+
+<h2 class="mt-4">Reviews from Other Users</h2>
+<div>
+    {% for review in reviews %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <p>{{ review[1] }}</p>  <!-- Corrected to display review text -->
+            {% if review[2] %}
+                <img src="{{ url_for('static', filename='uploads/' ~ review[2]) }}" class="img-fluid" alt="Review Image">  <!-- Correct image path -->
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

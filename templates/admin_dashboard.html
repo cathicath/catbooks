@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard | CatBooks{% endblock %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<h2>Add New Book</h2>
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="title" class="form-label">Book Title</label>
+        <input type="text" class="form-control" id="title" name="title" required>
+    </div>
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <input type="text" class="form-control" id="author" name="author" required>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">Price (USD)</label>
+        <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+    </div>
+    <div class="mb-3">
+        <label for="image" class="form-label">Book Image (optional)</label>
+        <input type="file" class="form-control" id="image" name="image">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Book</button>
+</form>
+
+<h2 class="mt-4">Current Books</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price (USD)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book[1] }}</td>
+            <td>{{ book[2] }}</td>
+            <td>${{ book[3] }}</td>
+            <td>
+                <form method="post" action="/delete_book/{{ book[0] }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h2 class="mt-4">Manage Reviews</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Review Text</th>
+            <th>Image</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for review in reviews %}
+        <tr>
+            <td>{{ review[1] }}</td>
+            <td>
+                {% if review[2] %}
+                    <img src="/static/uploads/{{ review[2] }}" alt="Review Image" style="max-height: 100px;">
+                {% else %}
+                    No Image
+                {% endif %}
+            </td>
+            <td>
+                <form method="post" action="/delete_review/{{ review[0] }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="/logout" class="btn btn-secondary mt-4">Logout</a>
+
+{% endblock %}
