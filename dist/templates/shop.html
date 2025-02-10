@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Shop | CatBooks{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center available-books-heading">Available Books</h1>
+
+<div class="container">
+    <div class="row">
+        {% for book in books %}
+        <div class="col-12 mb-3">
+            <div class="card p-3 shadow-sm d-flex flex-row align-items-center">
+                {% if book[4] %}
+                    <img src="{{ url_for('static', filename='uploads/' ~ book[4]) }}" 
+                         class="rounded" 
+                         alt="{{ book[1] }}" 
+                         style="width: 120px; height: auto; object-fit: contain;">
+                {% endif %}
+
+                <div class="ms-4 flex-grow-1">
+                    <h5 class="mb-1 book-title">
+                        <a href="{{ url_for('book_details', book_id=book[0]) }}" class="text-dark text-decoration-none">
+                            {{ book[1] }}
+                        </a>
+                    </h5>
+                    <p class="mb-1 text-muted">By {{ book[2] }}</p>
+                    <p class="mb-0 fw-bold text-success">${{ book[3] }}</p>
+                </div>
+
+                <!-- Add to Cart Button -->
+                <a href="{{ url_for('add_to_cart', book_id=book[0]) }}" class="btn custom-btn">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- CSS -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+
+    .available-books-heading, .book-title {
+        font-family: 'Julius Sans One', sans-serif;
+        font-weight: 400;
+        color: #8B5E3C;
+    }
+    .custom-btn {
+        background-color: #cfbeaa;
+        color: #ffffff;
+        border: none;
+        padding: 8px 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .custom-btn:hover {
+        background-color: #b7a897;
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+
+</style>
+{% endblock %}

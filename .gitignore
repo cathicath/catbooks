@@ -12,7 +12,8 @@ build/
 develop-eggs/
 dist/*
 !dist/app
-!dist/static
+!dist/static/
+!dist/templates/
 downloads/
 eggs/
 .eggs/
@@ -27,6 +28,13 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# Ignore decoded SQL file
+catbooks.sql
+
+# Ensure obfuscated version remains in Git
+!catbooks.db
+
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -180,3 +188,4 @@ cython_debug/
 .pypirc
 app.py
 catbooks
+

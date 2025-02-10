@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results | CatBooks{% endblock %}
+
+{% block content %}
+<h1 class="search-title text-center">Search Results for "{{ query }}"</h1>
+
+{% if results %}
+<div class="search-container">
+    <ul class="list-group">
+        {% for book in results %}
+        <li class="list-group-item search-item">
+            <a href="{{ url_for('book_details', book_id=book[0]) }}">
+                <strong>{{ book[1] }}</strong> by {{ book[2] }} - ${{ book[3] }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<p class="text-center">No results found for "{{ query }}".</p>
+{% endif %}
+
+<!-- CSS -->
+<style>
+    .search-title {
+        font-family: 'Julius Sans One', sans-serif;
+        font-weight: 400;
+        color: #8B5E3C
+    }
+    .search-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #b7a897;
+        padding: 20px;
+        border-radius: 3px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .search-item {
+        border-radius: 3px;
+    }
+</style>
+{% endblock %}
