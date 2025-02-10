@@ -47,11 +47,11 @@ This will start both the Flask application and the MySQL database in the backgro
 docker cp catbooks.sql catbooks_mysql:/catbooks.sql  
 docker cp books.sql catbooks_mysql:/books.sql  
   
-Access the MySQL Container:  
+**Access the MySQL Container:**  
 docker exec -it catbooks_mysql mysql -u root -p  
 (Enter password: kali123)  
   
-Run These SQL Commands:  
+**Run These SQL Commands:**  
 USE catbooks_db;  
 SOURCE /catbooks.sql;  
 SOURCE /books.sql;  
