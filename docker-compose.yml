@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8
+    container_name: catbooks_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: kali123
+      MYSQL_DATABASE: catbooks_db
+      MYSQL_USER: catbooks_user
+      MYSQL_PASSWORD: catbooks_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - catbooks_network
+
+  web:
+    build: .
+    container_name: catbooks_app
+    restart: always
+    depends_on:
+      - db
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - "5000:5000"
+    networks:
+      - catbooks_network
+
+volumes:
+  mysql_data:
+
+networks:
+  catbooks_network:

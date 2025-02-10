@@ -1,39 +1,63 @@
-1. Clone the Repository  
+# CatBooks - Online Bookstore  
+  
+CatBooks is a web-based bookstore built with Flask, MySQL, and Docker. It allows users to browse books, manage reviews, and provides an admin panel for book management.  
+  
+## Features  
+- Browse available books  
+- User authentication system  
+- Admin panel for managing books and reviews  
+- Responsive design  
+- Dockerized setup for easy deployment  
+- Virtual environment support (`venv`)  
+  
+---  
+  
+## Installation  
+  
+### 1. Clone the repository  
+  
 git clone https://github.com/cathicath/catbooks.git  
 cd catbooks  
+
+### 2. Create and activate a virtual environment  
   
-2. Set Up a Virtual Environment  
+Before running the application, ensure you are using a virtual environment:  
+  
 python3 -m venv venv  
 source venv/bin/activate  
   
-3. Install Dependencies  
+## Setup and Run  
+  
+### 1. Install Dependencies  
+  
 pip install -r requirements.txt  
   
-4. Configure the Database  
-Ensure MySQL is running and create the database manually if needed:  
-CREATE DATABASE catbooks_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;  
+### 2. Ensure Docker is installed
   
-Then, import the database schema:  
-mysql -u root -p catbooks_db < catbooks.sql  
+## Running with Docker  
   
-5. Update Database Credentials in app.py  
+### 1. Start the application  
   
-Modify app.py to include your database credentials:  
-Database Connection  
-import mysql.connector  
+docker-compose up --build -d  
   
-conn = mysql.connector.connect(  
-    host="localhost",  
-    user="root",  
-    password="yourpassword",  
-    database="catbooks_db",  
-    charset="utf8mb4",  
-    collation="utf8mb4_unicode_ci"  
-)  
-cursor = conn.cursor()  
+This will start both the Flask application and the MySQL database in the background.  
   
-6. Run the Application  
-python3 app.py  
+### 2. Import the database schema and books data  
   
-The application will be available at:  
-http://127.0.0.1:5000  
+Once the database container is running, execute the following commands to load the database structure (catbooks.sql) and add books to the shop (books.sql):  
+  
+docker exec -i catbooks_mysql mysql -u root -p catbooks_db < catbooks.sql  
+docker exec -i catbooks_mysql mysql -u root -p catbooks_db < books.sql  
+  
+When prompted, enter the MySQL root password (found in .env).  
+  
+### 3. Restart the application  
+  
+docker restart catbooks_app  
+  
+## Access the Application
+  
+After setup, open your browser and go to:  
+http://localhost:5000  
+  
+

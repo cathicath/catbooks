@@ -12,17 +12,34 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads'
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Connect to MySQL Database
-conn = mysql.connector.connect(
-    host='localhost',
-    user='root',
-    password='kali123',
-    database='catbooks_db',
-    charset='utf8mb4',
-    collation='utf8mb4_unicode_ci'
-)
+
+import time
+import os
+import mysql.connector
+
+# Vänteloop för att ge MySQL tid att starta
+MAX_RETRIES = 10
+for i in range(MAX_RETRIES):
+    try:
+        conn = mysql.connector.connect(
+            host=os.getenv("DB_HOST", "db"),
+            user=os.getenv("DB_USER", "root"),
+            password=os.getenv("DB_PASSWORD", "kali123"),
+            database=os.getenv("DB_NAME", "catbooks_db"),
+            charset="utf8mb4",
+            collation="utf8mb4_unicode_ci"
+        )
+        print("✅ Connected to MySQL!")
+        break
+    except mysql.connector.Error as err:
+        print(f"⚠️ MySQL not ready (attempt {i+1}/{MAX_RETRIES}): {err}")
+        time.sleep(5)  # Vänta 5 sekunder innan nästa försök
+
+if not conn.is_connected():
+    raise Exception("❌ Failed to connect to MySQL after multiple attempts.")
 
 cursor = conn.cursor()
+
 
 @app.route('/')
 def home():
@@ -238,4 +255,4 @@ def admin_dashboard():
     return render_template('admin_dashboard.html', books=books, reviews=reviews)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
