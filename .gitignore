@@ -28,6 +28,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+*.sql
 
 # Ignore decoded SQL file
 catbooks.sql
