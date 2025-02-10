@@ -1,38 +1,28 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 import os
-from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 import re  # Import regex for blacklist filtering
 import urllib.parse  # Import for URL decoding
 
-# Load environment variables from .env
-load_dotenv()
-
 app = Flask(__name__)
-
-# Use SECRET_KEY from .env (fallback to a default if not set)
-app.secret_key = os.getenv('SECRET_KEY', 'fallback_secret_key')
+app.secret_key = 'supersecretkey'
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# Connect to MySQL Database using .env variables
-try:
-    conn = mysql.connector.connect(
-        host=os.getenv('DB_HOST', 'localhost'),
-        user=os.getenv('DB_USER', 'root'),
-        password=os.getenv('DB_PASSWORD', ''),
-        database=os.getenv('DB_NAME', 'catbooks_db'),
-        charset='utf8mb4',
-        collation='utf8mb4_unicode_ci'
-    )
-    cursor = conn.cursor()
-    print("[✔] Connected to the database successfully!")
-except mysql.connector.Error as err:
-    print(f"[❌] Database connection error: {err}")
+# Connect to MySQL Database
+conn = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='kali123',
+    database='catbooks_db',
+    charset='utf8mb4',
+    collation='utf8mb4_unicode_ci'
+)
 
+cursor = conn.cursor()
 
 @app.route('/')
 def home():
