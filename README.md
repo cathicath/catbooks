@@ -42,14 +42,22 @@ docker-compose up --build -d
   
 This will start both the Flask application and the MySQL database in the background.  
   
-### 2. Import the database schema and books data  
+### 2. Load the Database Schema  
   
-Once the database container is running, execute the following commands to load the database structure (catbooks.sql) and add books to the shop (books.sql):  
+docker cp catbooks.sql catbooks_mysql:/catbooks.sql  
+docker cp books.sql catbooks_mysql:/books.sql  
   
-docker exec -i catbooks_mysql mysql -u root -p catbooks_db < catbooks.sql  
-docker exec -i catbooks_mysql mysql -u root -p catbooks_db < books.sql  
+Access the MySQL Container:  
+docker exec -it catbooks_mysql mysql -u root -p  
+(Enter password: kali123)  
   
-When prompted, enter the MySQL root password (found in .env).  
+Run These SQL Commands:  
+USE catbooks_db;  
+SOURCE /catbooks.sql;  
+SOURCE /books.sql;  
+SHOW TABLES;  
+  
+Make sure you see the tables books, reviews, and users.  
   
 ### 3. Restart the application  
   
