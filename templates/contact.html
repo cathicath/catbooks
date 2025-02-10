@@ -3,27 +3,53 @@
 {% block title %}Contact | CatBooks{% endblock %}
 
 {% block content %}
-<div class="card">
-    <div class="card-body">
-        <h1 class="card-title">Do you wish to contact us?</h1>
-        {% if submitted %}
-            <div class="alert alert-success" role="alert">
-                Thank you, {{ name }}! Your message has been sent.
+<h1 class="contact-title text-center">Contact Us</h1>
+
+<div class="contact-container">
+    {% if submitted %}
+        <div class="alert alert-success text-center">Thank you! Your message has been sent.</div>
+    {% else %}
+        <form method="post" class="contact-form">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
-            <p><strong>Message:</strong> {{ message }}</p>
-        {% else %}
-            <form method="post">
-                <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-        {% endif %}
-    </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn custom-btn w-100">Send</button>
+        </form>
+    {% endif %}
 </div>
+
+<!-- CSS -->
+<style>
+    .contact-title {
+        font-family: 'Julius Sans One', sans-serif;
+        font-weight: 400;
+        color: #8B5E3C
+    }
+    .contact-container {
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #b7a897;;
+        padding: 20px;
+        border-radius: 3px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .custom-btn {
+        background-color: #d3ccc4;
+        color: #ffffff;
+        font-weight: bold;
+        border-radius: 3px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .custom-btn:hover {
+        background-color: #dbd8d6;
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+    
+</style>
 {% endblock %}

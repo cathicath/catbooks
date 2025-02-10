@@ -4,18 +4,45 @@
 
 {% block content %}
 <div class="text-center">
-    <h1 class="display-4">Welcome to CatBooks!</h1>
-    <p class="lead">Step into a world of magic, adventure, and endless possibilities! At CatBooks, we bring you the best fantasy stories—from legendary epics to undiscovered treasures—ready to transport you to realms beyond imagination.<br><br>
-    
-        Explore our collection of handpicked fantasy books.<br><br>
-
-        Search for your next great read or browse our latest additions.<br><br>
-
+    <h1 class="display-4 home-title">Welcome to CatBooks</h1>
+    <p class="lead home-text">
+        Step into a world of magic, adventure, and endless possibilities! At CatBooks, we bring you the best fantasy stories—from legendary epics to undiscovered treasures—ready to transport you to realms beyond imagination.<br><br>
+        &#10023;<br><br>
+        Explore our collection of handpicked fantasy books.<br>
+        Search for your next great read or browse our latest additions.<br>
         Share your reviews and help fellow adventurers find their perfect story.<br><br>
-
-        Whether you’re a fearless dragon-slayer, a seeker of lost kingdoms, or just looking for your next escape into the unknown, your adventure starts here.<br><br>
-        
-        Welcome to CatBooks—where stories come to life!</p>
-    <a href="/shop" class="btn btn-primary">Explore Books</a>
+        &#10023;<br><br>
+        Whether you’re a fearless dragon-slayer, a seeker of lost kingdoms, or just looking for your next escape into the unknown, your adventure starts here.<br>
+        Welcome to CatBooks—where stories come to life!
+    </p>
+    <a href="/shop" class="btn custom-btn">Explore Books</a>
 </div>
+
+<!-- CSS -->
+<style>
+    .home-title {
+        font-family: 'Julius Sans One', sans-serif;
+        font-weight: 400;
+        color: #8B5E3C;
+    }
+    .home-text {
+        font-family: 'Arial', sans-serif;
+        font-size: 1rem;
+        color: #5C4033;
+        font-weight: 400;
+    }
+    .custom-btn {
+        background-color: #CFBEAA;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .custom-btn:hover {
+        background-color: #B7A897;
+        color: #ffffff;
+        transform: scale(1.05);
+    }
+</style>
 {% endblock %}

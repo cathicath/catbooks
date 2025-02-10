@@ -10,7 +10,9 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+dist/*
+!dist/app
+!dist/static
 downloads/
 eggs/
 .eggs/
@@ -50,6 +52,13 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+
+# Ignore database files, but allow catbooks.sql
+*.db
+*.sqlite3
+*.sqlite
+!catbooks.sql  # This ensures catbooks.sql is included in the repo
+
 
 # Translations
 *.mo
@@ -169,3 +178,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+app.py
+catbooks
