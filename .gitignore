@@ -1,4 +1,5 @@
 # Byte-compiled / optimized / DLL files
+.env
 __pycache__/
 *.py[cod]
 *$py.class
@@ -10,10 +11,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/*
-!dist/app
-!dist/static/
-!dist/templates/
+dist/
 downloads/
 eggs/
 .eggs/
@@ -28,14 +26,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-*.sql
-
-# Ignore decoded SQL file
-catbooks.sql
-
-# Ensure obfuscated version remains in Git
-!catbooks.db
-
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -61,13 +51,6 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-
-# Ignore database files, but allow catbooks.sql
-*.db
-*.sqlite3
-*.sqlite
-!catbooks.sql  # This ensures catbooks.sql is included in the repo
-
 
 # Translations
 *.mo
@@ -187,6 +170,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-app.py
-catbooks
+
 
