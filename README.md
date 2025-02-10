@@ -19,7 +19,7 @@ mysql -u root -p catbooks_db < catbooks.sql
 5. Update Database Credentials in app.py  
   
 Modify app.py to include your database credentials:  
-# Database Connection  
+Database Connection  
 import mysql.connector  
   
 conn = mysql.connector.connect(  
